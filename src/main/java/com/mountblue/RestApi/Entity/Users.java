@@ -1,5 +1,6 @@
 package com.mountblue.RestApi.Entity;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users", catalog = "test")
@@ -13,6 +14,18 @@ public class Users {
     private String name;
     private Integer salary;
     private String teamName;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private List<UsersLog> usersLogs;
+
+    public List<UsersLog> getUsersLogs() {
+        return usersLogs;
+    }
+
+    public void setUsersLogs(List<UsersLog> usersLogs) {
+        this.usersLogs = usersLogs;
+    }
 
     public Users() {
     }
